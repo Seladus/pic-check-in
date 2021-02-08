@@ -56,7 +56,9 @@ class Users {
         var data = fs.readFileSync(pathToUsers, 'utf8').split('\n');
         this.users = {};
         for (var u in data) {
-            this.users[data[u]] = new User(data[u], `${pathToUsersData}`);
+            if (data[u] != "") {
+                this.users[data[u]] = new User(data[u], `${pathToUsersData}`);
+            }
         }
     }
 
