@@ -1,0 +1,13 @@
+[Unit]
+Description=pic check in service
+After=network.target
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+ExecStart=node /usr/local/bin/pic-check-in/src/pic-check-in.js
+ExecStop=/usr/bin/bash /usr/local/bin/src/pic-check-in/stop.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -37,7 +37,10 @@ function reqListener () {
         var child = createCollectionElement(user); 
         element.appendChild(child);
     }
-    updateUsersListInForms(users);
+    if (!usersListUpdated) {
+        usersListUpdated = true;
+        updateUsersListInForms(users);
+    }
 }
 
 function updateCollection() {
@@ -88,6 +91,8 @@ function sendEndSessionRequest() {
     request.open("post", `/api?type=end_session&name=${name}`, true);
     request.send();
 }
+
+var usersListUpdated = false;
 
 (function(){
     updateCollection();
