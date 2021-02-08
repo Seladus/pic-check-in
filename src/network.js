@@ -28,7 +28,7 @@ function handleGET(req, res, users) {
                 }
             );
         }
-        console.log(`${formatDate(new Date(Date.now()))} [User] Serving json info on all users`);
+        //console.log(`${formatDate(new Date(Date.now()))} [User] Serving json info on all users`);
     } else {
         res.status(504);
         responseContent = 'Bad Request';
