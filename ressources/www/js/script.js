@@ -48,14 +48,6 @@ function updateCollection() {
 }
 
 function updateUsersListInForms(users) {
-    var request = new XMLHttpRequest();
-    request.onload =  () => {
-        var users = JSON.parse(this.responseText);
-        updateCollection();
-    };
-    request.open("get", "/api?type=users_info", true);
-    request.send();
-
     var listForms = document.getElementsByClassName("user_select");
     for (element in listForms) {
         clearAllChildren(listForms.item(element));

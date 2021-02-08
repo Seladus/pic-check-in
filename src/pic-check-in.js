@@ -32,3 +32,10 @@ process.on('SIGTERM', () => {
         console.log(`${formatDate(new Date(Date.now()))} [Info] Closing server`)
     })
 })
+
+process.on('SIGINT', () => {
+    server.close(() => {
+        users.EndAllSessions();
+        console.log(`${formatDate(new Date(Date.now()))} [Info] Closing server`)
+    })
+})
