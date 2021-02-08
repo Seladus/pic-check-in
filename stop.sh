@@ -1,0 +1,1 @@
+ps axf | grep pic-check-in | grep -v grep | awk '{print "kill -15 " $1}' | sh
