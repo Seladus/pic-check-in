@@ -80,6 +80,9 @@ function sendStartSessionRequest() {
     var isDistance = document.querySelector("#form_start > div > .user_distance > label > input").checked;
 
     var request = new XMLHttpRequest();
+    request.onload = function () {
+        document.location.reload();
+    };
     request.open("post", `/api?type=start_session&name=${name}&isDistance=${!isDistance}`, true);
     request.send();
 }
@@ -88,6 +91,9 @@ function sendEndSessionRequest() {
     var name = document.querySelector("#form_end > div > .user_select").value;
 
     var request = new XMLHttpRequest();
+    request.onload = function () {
+        document.location.reload();
+    };
     request.open("post", `/api?type=end_session&name=${name}`, true);
     request.send();
 }
