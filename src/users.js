@@ -2,17 +2,18 @@ var fs = require('fs');
 const { formatDate } = require('./format-time.js');
 
 class User {
-    constructor (userName, path) {
+    constructor (userName, user_id, weekly_work_time, db) {
         this.name = userName;
-        this.path = path;
+        this.user_id = user_id;
+        this.weekly_work_time = weekly_work_time;
+        this.db = db;
         this.isWorking = false;
         this.sessionStartTimeStamp = null;
         this.sessionIsDistance = false;
     }
 
-    SaveSession(duration) {
-        var sessionDescription = `${this.sessionStartTimeStamp},${duration},${this.sessionIsDistance}\n`;
-        fs.appendFile(`${this.path}/${this.name}.data`, sessionDescription, ()=>{});
+    SaveSession() {
+        this.db.InsertSession(this.user_id, this.sessionStartTimeStamp, Date.now(), this.sessionIsDistance);
     }
 
     StartSession(isDistance) {
@@ -51,15 +52,13 @@ class User {
 }
 
 class Users {
-    constructor (pathToUsers, pathToUsersData) {
-        this.pathToUsers = pathToUsers;
-        var data = fs.readFileSync(pathToUsers, 'utf8').split('\n');
-        this.users = {};
-        for (var u in data) {
-            if (data[u] != "") {
-                this.users[data[u]] = new User(data[u], `${pathToUsersData}`);
-            }
-        }
+    constructor (database) {
+        this.db = database;
+        const rows = this.db.GetUsers();
+        this.users = {}
+        rows.forEach((row) => {
+            this.users[row.user_name] = new User(row.user_name, row.user_id, row.weekly_work_time, this.db);
+        });
     }
 
     EndAllSessions() {

@@ -3,7 +3,11 @@ const Users = require('./users.js');
 const { handleGET, handlePOST } = require('./network.js'); 
 const { formatDate } = require('./format-time.js');
 const { readFileSync } = require('fs');
-var users = new Users(`${__dirname}/../ressources/users`, `${__dirname}/../ressources/users-data`);
+const Data = require('./data.js');
+
+var data = new Data(`${__dirname}/../ressources/users-data/Data.db`);
+
+var users = new Users(data);
 
 var rawdata = readFileSync(`${__dirname}/../network-config.json`);
 var config = JSON.parse(rawdata);
@@ -27,6 +31,7 @@ var server = app.listen(port, hostname, () => {
 });
 
 process.on('SIGTERM', () => {
+    data.db.close();
     server.close(() => {
         users.EndAllSessions();
         console.log(`${formatDate(new Date(Date.now()))} [Info] Closing server`)
@@ -34,6 +39,7 @@ process.on('SIGTERM', () => {
 })
 
 process.on('SIGINT', () => {
+    data.db.close();
     server.close(() => {
         users.EndAllSessions();
         console.log(`${formatDate(new Date(Date.now()))} [Info] Closing server`)
