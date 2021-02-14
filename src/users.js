@@ -13,7 +13,7 @@ class User {
     }
 
     SaveSession() {
-        this.db.InsertSession(this.user_id, this.sessionStartTimeStamp, Date.now(), this.sessionIsDistance);
+        this.db.InsertSession(this.user_id, this.sessionStartTimeStamp, Date.now(), this.sessionIsDistance, this.SessionLength());
     }
 
     StartSession(isDistance) {

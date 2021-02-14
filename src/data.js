@@ -37,8 +37,8 @@ class Data {
         return rows;
     }
 
-    InsertSession(user_id, start, end, is_distance) {
-        var sql = `INSERT INTO sessions (user_id, start_timestamp, end_timestamp, is_distance) values (${user_id}, ${start}, ${end}, ${is_distance});`;
+    InsertSession(user_id, start, end, is_distance, length) {
+        var sql = `INSERT INTO sessions (user_id, start_timestamp, end_timestamp, is_distance, length) values (${user_id}, ${start}, ${end}, ${is_distance}, ${length});`;
         try {
             this.db.prepare(sql).run();
             return true;
