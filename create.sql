@@ -15,7 +15,7 @@ CREATE TABLE sessions (
     start_timestamp INTEGER NOT NULL,
     end_timestamp INTEGER NOT NULL,
     is_distance INTEGER NOT NULL, 
-    length INTEGER NOT NULL
+    length INTEGER NOT NULL,
     FOREIGN KEY (user_id)
         REFERENCES users (user_id)
             ON DELETE CASCADE
