@@ -15,7 +15,18 @@ class Data {
 
     GetSessions() {
         var sql = `SELECT * FROM sessions;`;
-        var sessions_list = [];
+        const rows = this.db.prepare(sql).all();
+        return rows;
+    }
+
+    GetSessionsPosteriorToDate(timestamp) {
+        var sql = `SELECT * FROM sessions WHERE start_timestamp > ${timestamp};`;
+        const rows = this.db.prepare(sql).all();
+        return rows;
+    }
+
+    GetUserSessionsPosteriorToDate(timestamp, user_id) {
+        var sql = `SELECT * FROM sessions WHERE start_timestamp > ${timestamp} AND user_id = ${user_id};`;
         const rows = this.db.prepare(sql).all();
         return rows;
     }

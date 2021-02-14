@@ -2,9 +2,10 @@ var fs = require('fs');
 const { formatDate } = require('./format-time.js');
 
 class User {
-    constructor (userName, user_id, db) {
+    constructor (userName, user_id, weekly_work_time, db) {
         this.name = userName;
         this.user_id = user_id;
+        this.weekly_work_time = weekly_work_time;
         this.db = db;
         this.isWorking = false;
         this.sessionStartTimeStamp = null;
@@ -56,8 +57,7 @@ class Users {
         const rows = this.db.GetUsers();
         this.users = {}
         rows.forEach((row) => {
-            this.users[row.user_name] = new User(row.user_name, row.user_id, this.db);
-            console.log(this.users[row.user_name]);
+            this.users[row.user_name] = new User(row.user_name, row.user_id, row.weekly_work_time, this.db);
         });
     }
 

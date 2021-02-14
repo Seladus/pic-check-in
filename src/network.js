@@ -12,6 +12,8 @@ function handleGET(req, res, users) {
             'sessionStartTimeStamp' : user.sessionStartTimeStamp,
             'isWorking' : user.isWorking,
             'isDistance' : user.sessionIsDistance,
+            'user_id' : user.user_id,
+            'weekly_work_time' : user.weekly_work_time
         };
         //console.log(`${formatDate(new Date(Date.now()))} [User] Serving json info on user ${user.name}`);
     } else if (req.query.type == 'users_info') {
@@ -25,15 +27,25 @@ function handleGET(req, res, users) {
                     'sessionLength' : users.users[u].SessionLength(),
                     'isWorking' : users.users[u].isWorking,
                     'isDistance' : users.users[u].sessionIsDistance,
+                    'user_id' : users.users[u].user_id,
+                    'weekly_work_time' : users.users[u].weekly_work_time
                 }
             );
         }
     } else if (req.query.type == 'sessions_info') {
         res.type('json');
-        responseContent = users.db.GetSessions();
+        if (req.query.limit_date) {
+            responseContent = users.db.GetSessionsPosteriorToDate(req.query.limit_date);
+        } else {
+            responseContent = users.db.GetSessions();
+        }
     } else if (req.query.type == 'user_sessions_info' && users.GetUser(req.query.name)) {
         res.type('json');
-        responseContent = users.db.GetUserSessions(users.GetUser(req.query.name).user_id);
+        if (req.query.limit_date) {
+            responseContent = users.db.GetUserSessionsPosteriorToDate(req.query.limit_date, users.GetUser(req.query.name).user_id);
+        } else {
+            responseContent = users.db.GetUserSessions(users.GetUser(req.query.name).user_id);
+        }
     } else {
         res.status(504);
         responseContent = 'Bad Request';
