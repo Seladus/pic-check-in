@@ -28,7 +28,12 @@ function handleGET(req, res, users) {
                 }
             );
         }
-        //console.log(`${formatDate(new Date(Date.now()))} [User] Serving json info on all users`);
+    } else if (req.query.type == 'sessions_info') {
+        res.type('json');
+        responseContent = users.db.GetSessions();
+    } else if (req.query.type == 'user_sessions_info' && users.GetUser(req.query.name)) {
+        res.type('json');
+        responseContent = users.db.GetUserSessions(users.GetUser(req.query.name).user_id);
     } else {
         res.status(504);
         responseContent = 'Bad Request';
