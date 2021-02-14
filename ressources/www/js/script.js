@@ -1,5 +1,5 @@
 function createCollectionElement(user) {
-    var time = timeWorked[user.user_id]/360000;
+    var time = (timeWorked[user.user_id] + user.sessionLength)/1000/60/60;
     var child = document.createElement("li");
         var workingMessage = user.isWorking ? "oui" : "non";
         var innerHTML = `
