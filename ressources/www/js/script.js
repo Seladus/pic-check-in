@@ -1,5 +1,5 @@
 function createCollectionElement(user) {
-    var time = (timeWorked[user.user_id] + user.sessionLength)/1000/60/60;
+    var time = ((timeWorked[user.user_id] ? timeWorked[user.user_id] : 0) + user.sessionLength)/1000/60/60;
     var child = document.createElement("li");
         var workingMessage = user.isWorking ? "oui" : "non";
         var innerHTML = `
@@ -11,7 +11,7 @@ function createCollectionElement(user) {
             <a href="#!" class="secondary-content black-text">
                 <i class="material-icons">${user.isWorking ? (user.isDistance ? "contactless" : "event_seat") : "king_bed"}</i>
                 <span class="dot ${user.isWorking ? "green" : "red"}"></span>
-                <p>${time && time > 0.1 ? (time < 10 ? Number.parseFloat(time).toFixed(1) : Math.floor(time)) : 0}/${user.weekly_work_time}h</p>
+                <p>${time && time >= 0.1 ? (time < 10 ? Number.parseFloat(time).toFixed(2) : Math.floor(time)) : 0}/${user.weekly_work_time}h</p>
             </a>
         </li>`;
         child.innerHTML = innerHTML;
