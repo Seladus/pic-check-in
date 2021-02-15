@@ -34,14 +34,14 @@ process.on('SIGTERM', () => {
     data.db.close();
     server.close(() => {
         users.EndAllSessions();
-        console.log(`${formatDate(new Date(Date.now()))} [Info] Closing server`)
-    })
-})
+        console.log(`${formatDate(new Date(Date.now()))} [Info] Closing server`);
+    });
+});
 
 process.on('SIGINT', () => {
     data.db.close();
     server.close(() => {
         users.EndAllSessions();
-        console.log(`${formatDate(new Date(Date.now()))} [Info] Closing server`)
-    })
-})
+        console.log(`${formatDate(new Date(Date.now()))} [Info] Closing server`);
+    });
+});

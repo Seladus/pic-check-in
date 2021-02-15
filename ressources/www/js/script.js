@@ -1,5 +1,5 @@
 function createCollectionElement(user) {
-    var time = ((timeWorked[user.user_id] ? timeWorked[user.user_id] : 0) + user.sessionLength)/1000/60/60;
+    var time = ((user.weekly_worked_time ? user.weekly_worked_time : 0) + user.sessionLength)/1000/60/60;
     var child = document.createElement("li");
         var workingMessage = user.isWorking ? "oui" : "non";
         var innerHTML = `
@@ -11,7 +11,7 @@ function createCollectionElement(user) {
             <a href="#!" class="secondary-content black-text">
                 <i class="material-icons">${user.isWorking ? (user.isDistance ? "contactless" : "event_seat") : "king_bed"}</i>
                 <span class="dot ${user.isWorking ? "green" : "red"}"></span>
-                <p>${time && time >= 0.1 ? (time < 10 ? Number.parseFloat(time).toFixed(1) : Math.floor(time)) : 0}/${user.weekly_work_time}h</p>
+                <p>${time && time >= 0.01 ? (time < 10 ? Number.parseFloat(time).toFixed(1) : Math.floor(time)) : 0}/${user.weekly_work_time}h</p>
             </a>
         </li>`;
         child.innerHTML = innerHTML;
@@ -30,7 +30,7 @@ function clearAllChildren(element) {
     }
 }
 
-function reqListener () {
+function reqListener() {
     var element = document.getElementById("collection");
     clearUserCollection(element);
     var users = JSON.parse(this.responseText);
@@ -107,42 +107,6 @@ function getMondayOfCurrentWeek(d)
     var day = d.getDay();
     return new Date(d.getFullYear(), d.getMonth(), d.getDate() + (day == 0?-6:1)-day );
 }
-
-function getWeekSessionsData() {
-    var request = new XMLHttpRequest();
-    request.open("get", `/api?type=sessions_info&limit_date=${getMondayOfCurrentWeek(new Date(Date.now())).getTime()}`, false);
-    request.send();
-    return JSON.parse(request.responseText);
-}
-
-function updateWeekSessionsData() {
-    var request = new XMLHttpRequest();
-    request.onload = function () {
-        sessions_data = JSON.parse(request.responseText);
-    };
-    request.open("get", `/api?type=sessions_info&limit_date=${getMondayOfCurrentWeek(new Date(Date.now())).getTime()}`, true);
-    request.send();
-}
-
-function getTimeWorkedPerUser(sessions_data) {
-    var timeWorked = {};
-    sessions_data.forEach(session => {
-        if (!timeWorked[session.user_id]) {
-            timeWorked[session.user_id] = session.length;
-        } else {
-            timeWorked[session.user_id] += session.length;
-        }
-    });
-    return timeWorked;
-}
-
-var sessions_data = getWeekSessionsData();
-var timeWorked = getTimeWorkedPerUser(sessions_data);
-
-(function(){
-    setTimeout(arguments.callee, 900000);
-    updateWeekSessionsData();
-})();
 
 (function(){
     updateCollection();

@@ -37,6 +37,12 @@ class Data {
         return rows;
     }
 
+    GetUserWorkedTime(timestamp, user_id) {
+        var sql = `SELECT SUM(length) FROM sessions WHERE start_timestamp > ${timestamp} AND user_id = ${user_id};`;
+        const rows = this.db.prepare(sql).get();
+        return rows['SUM(length)'];
+    }
+
     InsertSession(user_id, start, end, is_distance, length) {
         var sql = `INSERT INTO sessions (user_id, start_timestamp, end_timestamp, is_distance, length) values (${user_id}, ${start}, ${end}, ${is_distance}, ${length});`;
         try {
