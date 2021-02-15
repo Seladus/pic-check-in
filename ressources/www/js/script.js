@@ -11,7 +11,7 @@ function createCollectionElement(user) {
             <a href="#!" class="secondary-content black-text">
                 <i class="material-icons">${user.isWorking ? (user.isDistance ? "contactless" : "event_seat") : "king_bed"}</i>
                 <span class="dot ${user.isWorking ? "green" : "red"}"></span>
-                <p>${time && time >= 0.1 ? (time < 10 ? Number.parseFloat(time).toFixed(2) : Math.floor(time)) : 0}/${user.weekly_work_time}h</p>
+                <p>${time && time >= 0.1 ? (time < 10 ? Number.parseFloat(time).toFixed(1) : Math.floor(time)) : 0}/${user.weekly_work_time}h</p>
             </a>
         </li>`;
         child.innerHTML = innerHTML;
