@@ -30,10 +30,10 @@ Pour effectuer des requêtes à l'API il faut passer par la route `/api`. La ré
 Toute requête à l'API doit fournir un paramètre `type` dont la valeur indique le type de requête :
 
 * `sessions_info` : permet d'obtenir toutes les sessions de tous les utilisateurs.
-  * `timestamp [optional]` : timestamp Unix auquel toutes les informations seront antérieures.
+  * `limit_date [optional]` : timestamp Unix auquel toutes les informations seront antérieures.
 * `user_sessions_info` : permet d'obtenir les sessions d'un utilisateur en particulier.
   * `name` : nom de l'utilisateur.
-  * `timestamp [optinal]` : timestamp Unix auquel toutes les informations seront antérieures.
+  * `limit-date [optinal]` : timestamp Unix auquel toutes les informations seront antérieures.
 * `user_info` : permet d'obtenir les informations relatives à un utilisateur.
   * `name` : nom de l'utilisateur.
 * `users_info` : permet d'obtenir les informations relatives à tous les utilisateurs.
