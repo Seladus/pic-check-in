@@ -1,8 +1,9 @@
 function createCollectionElement(user) {
+    var time = ((user.weekly_worked_time ? user.weekly_worked_time : 0) + user.sessionLength)/1000/60/60;
     var child = document.createElement("li");
         var workingMessage = user.isWorking ? "oui" : "non";
         var innerHTML = `
-        <li class="collection-item avatar user">
+        <li class="collection-item avatar user hoverable">
             <img src="images/placeholder.jpg" alt="" class="circle">
             <span class="title">${user.name}</span>
             <p>${user.isWorking ? "Est en train de travailler" : "Ne travaille pas"}<br>
@@ -10,6 +11,7 @@ function createCollectionElement(user) {
             <a href="#!" class="secondary-content black-text">
                 <i class="material-icons">${user.isWorking ? (user.isDistance ? "contactless" : "event_seat") : "king_bed"}</i>
                 <span class="dot ${user.isWorking ? "green" : "red"}"></span>
+                <p>${time && time >= 0.01 ? (time < 10 ? Number.parseFloat(time).toFixed(1) : Math.floor(time)) : 0}/${user.weekly_work_time}h</p>
             </a>
         </li>`;
         child.innerHTML = innerHTML;
@@ -28,7 +30,7 @@ function clearAllChildren(element) {
     }
 }
 
-function reqListener () {
+function reqListener() {
     var element = document.getElementById("collection");
     clearUserCollection(element);
     var users = JSON.parse(this.responseText);
@@ -99,6 +101,12 @@ function sendEndSessionRequest() {
 }
 
 var usersListUpdated = false;
+
+function getMondayOfCurrentWeek(d)
+{
+    var day = d.getDay();
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate() + (day == 0?-6:1)-day );
+}
 
 (function(){
     updateCollection();
