@@ -35,6 +35,7 @@ Toute requête à l'API doit fournir un paramètre `type` dont la valeur indique
   * `name` : nom de l'utilisateur.
   * `timestamp [optinal]` : timestamp Unix auquel toutes les informations seront antérieures.
 * `user_info` : permet d'obtenir les informations relatives à un utilisateur.
+  * `name` : nom de l'utilisateur.
 * `users_info` : permet d'obtenir les informations relatives à tous les utilisateurs.
 
 ### Exemple de requête
