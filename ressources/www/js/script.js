@@ -3,7 +3,7 @@ function createCollectionElement(user) {
     var child = document.createElement("li");
         var workingMessage = user.isWorking ? "oui" : "non";
         var innerHTML = `
-        <li class="collection-item avatar user hoverable">
+        <li class="collection-item avatar user hoverable amber lighten-4">
             <img src="images/placeholder.jpg" alt="" class="circle">
             <span class="title">${user.name}</span>
             <p>${user.isWorking ? "Est en train de travailler" : "Ne travaille pas"}<br>

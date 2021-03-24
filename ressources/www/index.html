@@ -29,32 +29,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 
-    <body class="black">
+    <body class="grey lighten-5">
         <div class="container">
             <div class="row">
+                <!-- placeholder for empty space -->
+            </div>
+            <div class="row">
                 <div class="col s8 offset-s2 center-align">
-                    <img class="responsive-img" src="images/logo.png">
+                    <img class="responsive-img" src="images/logo_criann.png">
                 </div>
             </div>
             <div class="container row">
                 <div class="input-field col s12">
                     <ul id="collection" class="collection with-header">
-                        <li class="collection-header">
+                        <li class="collection-header amber lighten-4">
                             <h4 class="">
-                                <button id="start_work_button" class="btn-large waves-effect waves-light orange black-text" value="not displayed" name="action" onclick="displayForm('form_start', 'start_work_button');">
+                                <button id="start_work_button" class="btn-large waves-effect waves-light amber accent black-text" value="not displayed" name="action" onclick="displayForm('form_start', 'start_work_button');">
                                     Commencer à travailler
                                     <i class="material-icons right">precision_manufacturing</i>
                                 </button>
-                                <button id="end_work_button" class="btn-large waves-effect waves-light orange black-text" value="not displayed" name="action" onclick="displayForm('form_end', 'end_work_button');">
+                                <button id="end_work_button" class="btn-large waves-effect waves-light amber accent black-text" value="not displayed" name="action" onclick="displayForm('form_end', 'end_work_button');">
                                     Finir de travailler
                                     <i class="material-icons right">nights_stay</i>
                                 </button>
                             </h4>
                         </li>
-                        <li id="form_start" class="collection-item userForm" style="display:none">
+                        <li id="form_start" class="collection-item userForm amber lighten-4" style="display:none">
                             <div>
                                 <label>Nom de l'utilisateur</label>
-                                    <select class="browser-default user_select">
+                                    <select class="browser-default user_select amber lighten-5">
                                         <option value="" disabled selected>Choix du nom</option>
                                     </select>
                                 <!-- Switch -->
@@ -68,20 +71,20 @@
                                     </label>
                                 </div>
                                 <br>
-                                <button class="btn waves-effect waves-light orange black-text" type="submit" name="action" onclick="sendStartSessionRequest();">Commencer session
+                                <button class="btn waves-effect waves-light amber black-text" type="submit" name="action" onclick="sendStartSessionRequest();">Commencer session
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>
                         </li>
-                        <li id="form_end" class="collection-item userForm" style="display:none">
+                        <li id="form_end" class="collection-item userForm amber lighten-4" style="display:none">
                             <div>
                                 <label>Nom de l'utilisateur</label>
-                                    <select class="browser-default user_select">
+                                    <select class="browser-default user_select amber lighten-5">
                                         <option value="" disabled selected>Choix du nom</option>
                                     </select>
                                 <!-- Switch -->
                                 <br>
-                                <button class="btn waves-effect waves-light orange black-text" type="submit" name="action" onclick="sendEndSessionRequest();">Finir session
+                                <button class="btn waves-effect waves-light amber black-text" type="submit" name="action" onclick="sendEndSessionRequest();">Finir session
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>
